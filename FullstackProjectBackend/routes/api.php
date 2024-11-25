@@ -10,5 +10,7 @@ Route::get('/user', function (Request $request) {
 Route::get('/search/{searchString}', [\App\Http\Controllers\SongController::class, 'getSongs']);
 Route::get('/song/{searchString}', [\App\Http\Controllers\SongController::class, 'getLyrics']);
 
+Route::get('/leaderboard', [\App\Http\Controllers\ResultController::class, 'getLeaderboard']);
+
 Route::post('/login', [\App\Http\Controllers\AuthenticationController::class, 'login']);
 Route::post('/register', [\App\Http\Controllers\AuthenticationController::class, 'register']);
