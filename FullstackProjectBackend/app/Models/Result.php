@@ -15,6 +15,8 @@ class Result extends Model
      * @var array<int, string>
      */
     protected $fillable = [
+        'user_id',
+        'song_id',
         'guess_count',
         'correct',
         'time',
