@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Services\ConfigService;
 use Illuminate\Support\Facades\Http;
+use WebSocket\Client;
 
 class SongController extends Controller
 {
@@ -15,7 +16,11 @@ class SongController extends Controller
         return $response;
     }
 
-    public function getLyrics() {
-        // @TODO: Get the lyrics of a song based on song id
+    public function getLyrics(int $songId) {
+        $client = new Client("ws://localhost:8080");
+
+        $client->text("Get-Lyrics" . ";" . $songId . ";" . ConfigService::get('genius.access_token'));
+
+        return $client->receive()->getContent();
     }
 }
