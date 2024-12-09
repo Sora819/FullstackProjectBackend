@@ -17,7 +17,11 @@ class AuthenticationController extends Controller
         if (Auth::attempt($credentials)) {
             $user = User::where('email', $request->email)->first();
 
-            return response()->json(['token' => $user->createToken('api token')->plainTextToken]);
+            return response()->json([
+                'token' => $user->createToken('api token')->plainTextToken,
+                'name' => $user->name,
+                'email' => $user->email
+            ]);
         }
 
         return response('The provided credentials do not match our records', 404);
@@ -40,6 +44,10 @@ class AuthenticationController extends Controller
         );
         $user->save();
 
-        return response()->json(['token' => $user->createToken('api token')->plainTextToken]);
+        return response()->json([
+            'token' => $user->createToken('api token')->plainTextToken,
+            'name' => $user->name,
+            'email' => $user->email
+        ]);
     }
 }
