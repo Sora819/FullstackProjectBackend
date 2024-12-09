@@ -12,7 +12,7 @@ Route::get('/song/{searchString}', [\App\Http\Controllers\SongController::class,
 
 Route::get('/leaderboard', [\App\Http\Controllers\ResultController::class, 'getLeaderboard']);
 
-Route::post('/saveResult', [\App\Http\Controllers\ResultController::class, 'saveResult']);
+Route::post('/saveResult', [\App\Http\Controllers\ResultController::class, 'saveResult'])->middleware('auth:sanctum');
 
 Route::post('/login', [\App\Http\Controllers\AuthenticationController::class, 'login']);
 Route::post('/register', [\App\Http\Controllers\AuthenticationController::class, 'register']);
