@@ -20,7 +20,8 @@ class AuthenticationController extends Controller
             return response()->json([
                 'token' => $user->createToken('api token')->plainTextToken,
                 'name' => $user->name,
-                'email' => $user->email
+                'email' => $user->email,
+                'id' => $user->id
             ]);
         }
 
@@ -47,7 +48,8 @@ class AuthenticationController extends Controller
         return response()->json([
             'token' => $user->createToken('api token')->plainTextToken,
             'name' => $user->name,
-            'email' => $user->email
+            'email' => $user->email,
+            'id' => $user->id
         ]);
     }
 }
