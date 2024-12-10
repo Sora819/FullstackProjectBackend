@@ -9,11 +9,11 @@ class ResultController extends Controller
 {
     public function getLeaderboard(): \Illuminate\Database\Eloquent\Collection
     {
-        $results = Result::query()->orderByDesc('correct')->orderByDesc('time')->limit(10);
+        $results = Result::query()->orderByDesc('correct')->orderByDesc('time')->limit(10)->with('song')->with('user');
         return $results->get();
     }
 
-    public function saveResult(Request $request): \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response|\Illuminate\Foundation\Application
+    public function saveResult(Request $request): \Illuminate\Http\JsonResponse
     {
         Result::create([
             'user_id' => $request->input('user_id'),
@@ -23,6 +23,9 @@ class ResultController extends Controller
             'time' => $request->input('time'),
         ]);
 
-        return response();
+        return response()->json([
+            'message' => 'Saved',
+            'status' => 200
+        ]);
     }
 }
