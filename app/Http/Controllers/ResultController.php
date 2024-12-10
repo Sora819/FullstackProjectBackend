@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Result;
-use Illuminate\Support\Facades\Request;
+use Illuminate\Http\Request;
 
 class ResultController extends Controller
 {
@@ -13,7 +13,7 @@ class ResultController extends Controller
         return $results->get();
     }
 
-    public function saveResult(Request $request): void
+    public function saveResult(Request $request): \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response|\Illuminate\Foundation\Application
     {
         Result::create([
             'user_id' => $request->input('user_id'),
@@ -22,5 +22,7 @@ class ResultController extends Controller
             'correct' => $request->input('correct'),
             'time' => $request->input('time'),
         ]);
+
+        return response();
     }
 }
